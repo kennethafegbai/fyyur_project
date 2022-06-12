@@ -148,7 +148,7 @@ def venues():
     grouped_venue["venues"] = filtered_venues_arr
     data.append(grouped_venue)
   #print(data)    
-  return render_template('pages/venues.html', areas=data)
+  return render_template('pages/venues.html', areas=data) 
 
 
 
@@ -280,7 +280,7 @@ def create_venue_form():
 def create_venue_submission():
     # TODO: insert form data as a new Venue record in the db, instead
     # TODO: modify data to be the data object returned from db insertion
-    body = {}
+    #body = {}
 
     form = VenueForm(request.form)
 
@@ -314,10 +314,10 @@ def create_venue_submission():
 
         db.session.add(new_venue)
         db.session.commit()
-        body['name'] = new_venue.name
+        #body['name'] = new_venue.name
         flash('Venue ' + request.form['name'] + ' was successfully listed!')
 
-      except:
+      except Exception:
       # TODO: on unsuccessful db insert, flash an error instead.
       # e.g., flash('An error occurred. Venue ' + data.name + ' could not be listed.')
       # see: http://flask.pocoo.org/docs/1.0/patterns/flashing/
@@ -444,6 +444,7 @@ def artists():
   #   "name": "Guns N Petals",
   # }]
   data = Artist.query.with_entities(Artist.id, Artist.name).all()
+  data = Artist.query.all()
   #data = db.session.query(Artist.id, Artist.name).all() ------ working too
   return render_template('pages/artists.html', artists=data)
 
